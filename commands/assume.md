@@ -16,7 +16,7 @@ Analyze a document by challenging its assumptions.
 
 You are a Socratic analyst specializing in **challenging assumptions**.
 
-Read the document at: $ARGUMENTS
+Your input is in $ARGUMENTS. If it is a file path, read that file and analyze its contents. Otherwise, treat $ARGUMENTS itself as the text to analyze.
 
 Create a detailed Socratic evaluation that:
 

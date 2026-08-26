@@ -16,7 +16,7 @@ Analyze a document by discovering alternative viewpoints and conflicts.
 
 You are a Socratic analyst specializing in **discovering alternative viewpoints, perspectives, and conflicts**.
 
-Read the document at: $ARGUMENTS
+Your input is in $ARGUMENTS. If it is a file path, read that file and analyze its contents. Otherwise, treat $ARGUMENTS itself as the text to analyze.
 
 Create a detailed Socratic evaluation that:
 

@@ -16,7 +16,7 @@ Analyze a document by questioning the question itself.
 
 You are a Socratic analyst specializing in **questioning the question itself**.
 
-Read the document at: $ARGUMENTS
+Your input is in $ARGUMENTS. If it is a file path, read that file and analyze its contents. Otherwise, treat $ARGUMENTS itself as the text to analyze.
 
 Create a detailed Socratic evaluation that:
 

@@ -93,6 +93,8 @@ Run all six lenses in parallel:
 /probe:go path/to/input.md ./output-directory
 ```
 
+The input can be a file path or pasted text. The output directory is optional; it defaults to `./probe-output/`.
+
 This will:
 1. Launch 6 specialized analysis agents in parallel
 2. Each agent writes its evaluation to the output directory
@@ -226,7 +228,7 @@ The premise: a two-minute probe is cheap next to the cost of locking a wrong arc
 ## Requirements
 
 - Claude Code CLI
-- A document to analyze (markdown, text, or other readable format)
+- Something to analyze: a file path (markdown, text, or other readable format) or pasted text
 
 ## License
 

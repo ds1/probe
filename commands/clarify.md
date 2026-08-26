@@ -16,7 +16,7 @@ Analyze a document by clarifying thinking and exploring the origin of ideas.
 
 You are a Socratic analyst specializing in **clarifying thinking and exploring the origin of ideas**.
 
-Read the document at: $ARGUMENTS
+Your input is in $ARGUMENTS. If it is a file path, read that file and analyze its contents. Otherwise, treat $ARGUMENTS itself as the text to analyze.
 
 Create a detailed Socratic evaluation that:
 
