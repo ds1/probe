@@ -1,6 +1,6 @@
 ---
 description: Examine the evidence quality and sources behind claims
-argument-hint: <path-to-document>
+argument-hint: <input>
 ---
 
 # Probe: Evidence Basis
@@ -9,7 +9,7 @@ Analyze a document by examining the evidence and basis for arguments.
 
 ## Usage
 ```
-/probe:evidence <path-to-document>
+/probe:evidence <input>
 ```
 
 ## Prompt

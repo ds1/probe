@@ -1,6 +1,6 @@
 ---
 description: Run all six Socratic lenses in parallel and synthesize the findings
-argument-hint: <path-to-document> <output-directory>
+argument-hint: <input> <output-directory>
 ---
 
 # Probe: Full Socratic Analysis
@@ -9,7 +9,7 @@ Launch 6 parallel Socratic evaluation agents to analyze a document, then synthes
 
 ## Usage
 ```
-/probe:start <path-to-document> <output-directory>
+/probe:go <input> <output-directory>
 ```
 
 ## Arguments
@@ -119,7 +119,7 @@ Skip it for reversible work: implementation PRs, bug fixes, copy edits, refactor
 
 1. **Draft the write-up.** Lead with what is blocked and how reversible each option is. Calibrate to the current state, not an imagined future; handle the future with written reversal triggers instead of guesses. Anchor every number with its source: measured, estimated, vendor-cited (with a date), or industry-comparison.
 
-2. **Invoke the probe** on that draft: `/probe:start <doc-path> <output-dir>`. The six agents run independently, with no shared context with you or each other.
+2. **Invoke the probe** on that draft: `/probe:go <input> <output-dir>`. The six agents run independently, with no shared context with you or each other.
 
 3. **Ground the agents in the code when the doc cites code.** If the write-up references specific function names, constant values, file paths, or schema columns, add to each agent's launch prompt: "verify any specific code claims against the actual code at the cited paths; do not take the doc's claims about its own codebase at face value." Without this, agents reason from the prose and miss code-fact bugs. This is not hypothetical: with grounding on, a probe caught a doc claiming a `3 * X` multiplier where the code actually used `4 * X`, a bug the author's own review had read straight past.
 

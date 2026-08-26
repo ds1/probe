@@ -12,14 +12,14 @@ Each lens is an independent agent asking a different critical question:
 
 | Command | Purpose |
 |---------|---------|
-| `/probe:start` | **Full analysis** - launches 6 parallel agents and synthesizes findings |
+| `/probe:go` | **Full analysis** - launches 6 parallel agents and synthesizes findings |
 | `/probe:clarify` | Clarify thinking and trace origin of ideas |
 | `/probe:assume` | Challenge hidden assumptions |
 | `/probe:evidence` | Examine evidence quality and sources |
 | `/probe:pov` | Explore alternative viewpoints |
 | `/probe:implications` | Trace implications and consequences |
-| `/probe:qq` | Question the question itself |
-| `/probe:synthesis` | Synthesize existing evaluation files |
+| `/probe:meta` | Question the question itself |
+| `/probe:synth` | Synthesize existing evaluation files |
 
 ## Installation
 
@@ -32,14 +32,14 @@ This repo is a Claude Code plugin marketplace. Inside Claude Code, run:
 /plugin install probe@schmitz
 ```
 
-You get versioned, updatable commands, invoked as `/probe:start`,
+You get versioned, updatable commands, invoked as `/probe:go`,
 `/probe:assume`, and so on. To update later, run `/plugin` and update when a new
 version is published.
 
 ### Alternative: one command (global)
 
 Copies the command files into `~/.claude/commands/probe/`, where they are invoked
-the same way, `/probe:start`, `/probe:clarify`, etc.
+the same way, `/probe:go`, `/probe:clarify`, etc.
 
 **macOS / Linux / WSL / Git Bash:**
 
@@ -90,7 +90,7 @@ cp socratic-probes/commands/*.md YOUR_PROJECT_ROOT/.claude/commands/probe/
 Run all six lenses in parallel:
 
 ```
-/probe:start path/to/document.md ./output-directory
+/probe:go path/to/input.md ./output-directory
 ```
 
 This will:
@@ -112,12 +112,12 @@ This will:
 Run a specific type of analysis:
 
 ```
-/probe:clarify path/to/document.md       # Clarify thinking
-/probe:assume path/to/document.md        # Challenge assumptions
-/probe:evidence path/to/document.md      # Examine evidence
-/probe:pov path/to/document.md           # Alternative viewpoints
-/probe:implications path/to/document.md  # Trace consequences
-/probe:qq path/to/document.md            # Question the question
+/probe:clarify path/to/input.md       # Clarify thinking
+/probe:assume path/to/input.md        # Challenge assumptions
+/probe:evidence path/to/input.md      # Examine evidence
+/probe:pov path/to/input.md           # Alternative viewpoints
+/probe:implications path/to/input.md  # Trace consequences
+/probe:meta path/to/input.md          # Question the question
 ```
 
 ### Synthesize existing evaluations
@@ -125,7 +125,7 @@ Run a specific type of analysis:
 If you have run individual lenses and want to consolidate them:
 
 ```
-/probe:synthesis ./output-directory
+/probe:synth ./output-directory
 ```
 
 ## The six lenses
@@ -213,7 +213,7 @@ what the probe produces, and what it catches, before running your own.
 
 ## The decision-probe loop (where the depth is)
 
-The six lenses are the engine. The real power is running them as a disciplined loop around a decision you are about to lock. `/probe:start` ships with a full methodology section covering:
+The six lenses are the engine. The real power is running them as a disciplined loop around a decision you are about to lock. `/probe:go` ships with a full methodology section covering:
 
 - **When to probe** - schema/money/audit changes, cross-system contracts, dependency locks; and when to skip (anything reversible in under a day).
 - **Scan for an existing decision first** - if a prior ADR already owns the ground, your write-up is an amendment, not a peer.
@@ -221,7 +221,7 @@ The six lenses are the engine. The real power is running them as a disciplined l
 - **Read the synthesis cold** - write your concessions and pushback before touching the original, then respond once with a unified summary.
 - **After the probe** - when to write a v2, when to escalate a thin result, and the spirit-conflict scan for shape-similar prior decisions.
 
-The premise: a two-minute probe is cheap next to the cost of locking a wrong architectural choice and only discovering it after you have built on top of it. Run `/probe:start` and read the full methodology inline.
+The premise: a two-minute probe is cheap next to the cost of locking a wrong architectural choice and only discovering it after you have built on top of it. Run `/probe:go` and read the full methodology inline.
 
 ## Requirements
 

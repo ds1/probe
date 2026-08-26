@@ -1,6 +1,6 @@
 ---
 description: Clarify thinking and trace the origin of ideas
-argument-hint: <path-to-document>
+argument-hint: <input>
 ---
 
 # Probe: Clarify Thinking
@@ -9,7 +9,7 @@ Analyze a document by clarifying thinking and exploring the origin of ideas.
 
 ## Usage
 ```
-/probe:clarify <path-to-document>
+/probe:clarify <input>
 ```
 
 ## Prompt

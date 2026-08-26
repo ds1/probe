@@ -1,6 +1,6 @@
 ---
 description: Question whether the document asks the right question
-argument-hint: <path-to-document>
+argument-hint: <input>
 ---
 
 # Probe: Question the Question
@@ -9,7 +9,7 @@ Analyze a document by questioning the question itself.
 
 ## Usage
 ```
-/probe:qq <path-to-document>
+/probe:meta <input>
 ```
 
 ## Prompt

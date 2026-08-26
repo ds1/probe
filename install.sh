@@ -6,7 +6,7 @@
 #
 # Installing as a Claude Code plugin is the recommended path; see the README.
 # This script copies the command files into ~/.claude/commands/probe/, where
-# they are invoked as /probe:start, /probe:clarify, and so on.
+# they are invoked as /probe:go, /probe:clarify, and so on.
 set -euo pipefail
 
 REPO_URL="https://github.com/ds1/socratic-probes.git"
@@ -34,4 +34,4 @@ cp "$SRC"/*.md "$DEST"/
 
 count="$(ls "$SRC"/*.md | wc -l | tr -d ' ')"
 echo "Installed $count probe commands to $DEST"
-echo "Open Claude Code and run /probe:start <doc> <output-dir> to begin."
+echo "Open Claude Code and run /probe:go <input> <output-dir> to begin."

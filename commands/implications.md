@@ -1,6 +1,6 @@
 ---
 description: Trace the implications and consequences
-argument-hint: <path-to-document>
+argument-hint: <input>
 ---
 
 # Probe: Implications & Consequences
@@ -9,7 +9,7 @@ Analyze a document by exploring implications and consequences.
 
 ## Usage
 ```
-/probe:implications <path-to-document>
+/probe:implications <input>
 ```
 
 ## Prompt

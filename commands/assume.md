@@ -1,6 +1,6 @@
 ---
 description: Challenge the hidden assumptions in a document
-argument-hint: <path-to-document>
+argument-hint: <input>
 ---
 
 # Probe: Challenge Assumptions
@@ -9,7 +9,7 @@ Analyze a document by challenging its assumptions.
 
 ## Usage
 ```
-/probe:assume <path-to-document>
+/probe:assume <input>
 ```
 
 ## Prompt

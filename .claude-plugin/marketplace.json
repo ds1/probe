@@ -12,7 +12,7 @@
       "name": "probe",
       "source": "./",
       "displayName": "Probe",
-      "description": "Six-lens analysis. Run /probe:start to launch all six lenses in parallel and synthesize the findings.",
+      "description": "Six-lens analysis. Run /probe:go to launch all six lenses in parallel and synthesize the findings.",
       "version": "1.0.0"
     }
   ]

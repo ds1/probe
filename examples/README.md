@@ -1,6 +1,6 @@
 # Example walkthrough
 
-A complete run of `/probe:start` against a realistic decision doc, so you can see
+A complete run of `/probe:go` against a realistic decision doc, so you can see
 what the six lenses and the synthesis actually produce before you run your own.
 
 ## The input
@@ -15,7 +15,7 @@ an unquantified "flag volume will only grow."
 ## The command
 
 ```
-/probe:start examples/sample-decision.md examples/output
+/probe:go examples/sample-decision.md examples/output
 ```
 
 ## The output

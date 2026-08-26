@@ -1,6 +1,6 @@
 ---
 description: Explore alternative viewpoints and counter-arguments
-argument-hint: <path-to-document>
+argument-hint: <input>
 ---
 
 # Probe: Alternative Points of View
@@ -9,7 +9,7 @@ Analyze a document by discovering alternative viewpoints and conflicts.
 
 ## Usage
 ```
-/probe:pov <path-to-document>
+/probe:pov <input>
 ```
 
 ## Prompt

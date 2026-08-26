@@ -9,7 +9,7 @@ Synthesize findings from existing Socratic evaluation files into a consolidated 
 
 ## Usage
 ```
-/probe:synthesis <directory-containing-evaluations>
+/probe:synth <directory-containing-evaluations>
 ```
 
 ## Prompt

@@ -5,7 +5,7 @@
 #
 # Installing as a Claude Code plugin is the recommended path; see the README.
 # This script copies the command files into ~/.claude/commands/probe/, where
-# they are invoked as /probe:start, /probe:clarify, and so on.
+# they are invoked as /probe:go, /probe:clarify, and so on.
 $ErrorActionPreference = 'Stop'
 
 $repoUrl = 'https://github.com/ds1/socratic-probes.git'
@@ -28,4 +28,4 @@ Copy-Item (Join-Path $src '*.md') $dest -Force
 
 $count = (Get-ChildItem (Join-Path $src '*.md')).Count
 Write-Host "Installed $count probe commands to $dest"
-Write-Host "Open Claude Code and run /probe:start <doc> <output-dir> to begin."
+Write-Host "Open Claude Code and run /probe:go <input> <output-dir> to begin."
