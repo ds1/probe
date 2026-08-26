@@ -1,21 +1,25 @@
-# Socratic Probes
+# Probe
 
-A collection of Claude Code slash commands for rigorous Socratic analysis of documents, proposals, and recommendations.
+A set of Claude Code slash commands that examine and sharpen a concept from six
+critical angles. Point them at a decision, a proposal, a research write-up, or a
+page of raw notes; six lenses run in parallel and synthesize an actionable verdict.
 
-## What It Does
+Live at [probe.md](https://probe.md).
 
-These skills apply the Socratic method to critically examine documents through six specialized lenses:
+## What it does
+
+Each lens is an independent agent asking a different critical question:
 
 | Command | Purpose |
 |---------|---------|
-| `/probe-start` | **Full Analysis** - Launches 6 parallel agents and synthesizes findings |
-| `/probe-clarify` | Clarify thinking and trace origin of ideas |
-| `/probe-assume` | Challenge hidden assumptions |
-| `/probe-evidence` | Examine evidence quality and sources |
-| `/probe-pov` | Explore alternative viewpoints |
-| `/probe-implications` | Trace implications and consequences |
-| `/probe-qq` | Question the question itself |
-| `/probe-synthesis` | Synthesize existing evaluation files |
+| `/probe:start` | **Full analysis** - launches 6 parallel agents and synthesizes findings |
+| `/probe:clarify` | Clarify thinking and trace origin of ideas |
+| `/probe:assume` | Challenge hidden assumptions |
+| `/probe:evidence` | Examine evidence quality and sources |
+| `/probe:pov` | Explore alternative viewpoints |
+| `/probe:implications` | Trace implications and consequences |
+| `/probe:qq` | Question the question itself |
+| `/probe:synthesis` | Synthesize existing evaluation files |
 
 ## Installation
 
@@ -25,18 +29,17 @@ This repo is a Claude Code plugin marketplace. Inside Claude Code, run:
 
 ```
 /plugin marketplace add ds1/socratic-probes
-/plugin install socratic-probes@probe-md
+/plugin install probe@schmitz
 ```
 
-You get versioned, updatable commands. Plugin commands are namespaced under the
-plugin name, so you invoke them as `/socratic-probes:probe-start`,
-`/socratic-probes:probe-assume`, and so on. To update later, bump nothing on your
-end: run `/plugin` and update when a new version is published.
+You get versioned, updatable commands, invoked as `/probe:start`,
+`/probe:assume`, and so on. To update later, run `/plugin` and update when a new
+version is published.
 
-### Alternative: one command (global, un-namespaced)
+### Alternative: one command (global)
 
-Copies the command files into `~/.claude/commands`, where they are invoked with
-the bare names `/probe-start`, `/probe-assume`, etc.
+Copies the command files into `~/.claude/commands/probe/`, where they are invoked
+the same way, `/probe:start`, `/probe:clarify`, etc.
 
 **macOS / Linux / WSL / Git Bash:**
 
@@ -64,28 +67,30 @@ cd socratic-probes
 Global (all projects):
 
 ```bash
-cp socratic-probes/commands/*.md ~/.claude/commands/
+mkdir -p ~/.claude/commands/probe
+cp socratic-probes/commands/*.md ~/.claude/commands/probe/
 ```
 
 ```powershell
-Copy-Item socratic-probes\commands\*.md $env:USERPROFILE\.claude\commands\
+New-Item -ItemType Directory -Force $env:USERPROFILE\.claude\commands\probe
+Copy-Item socratic-probes\commands\*.md $env:USERPROFILE\.claude\commands\probe\
 ```
 
 Or project-level, so the commands ship with a specific repo:
 
 ```bash
-mkdir -p YOUR_PROJECT_ROOT/.claude/commands
-cp socratic-probes/commands/*.md YOUR_PROJECT_ROOT/.claude/commands/
+mkdir -p YOUR_PROJECT_ROOT/.claude/commands/probe
+cp socratic-probes/commands/*.md YOUR_PROJECT_ROOT/.claude/commands/probe/
 ```
 
 ## Usage
 
-### Full Socratic Analysis
+### Full analysis
 
-Run a comprehensive analysis with 6 parallel agents:
+Run all six lenses in parallel:
 
 ```
-/probe-start path/to/document.md ./output-directory
+/probe:start path/to/document.md ./output-directory
 ```
 
 This will:
@@ -94,36 +99,36 @@ This will:
 3. Create a synthesis document consolidating all findings
 
 **Output files:**
-- `socratic-1-clarify-thinking.md`
-- `socratic-2-challenge-assumptions.md`
-- `socratic-3-evidence-basis.md`
-- `socratic-4-alternative-viewpoints.md`
-- `socratic-5-implications-consequences.md`
-- `socratic-6-question-the-question.md`
-- `socratic-synthesis.md` (consolidated findings)
+- `probe-1-clarify-thinking.md`
+- `probe-2-challenge-assumptions.md`
+- `probe-3-evidence-basis.md`
+- `probe-4-alternative-viewpoints.md`
+- `probe-5-implications-consequences.md`
+- `probe-6-question-the-question.md`
+- `probe-synthesis.md` (consolidated findings)
 
-### Individual Probes
+### Individual lenses
 
-Run specific types of analysis:
-
-```
-/probe-clarify path/to/document.md    # Clarify thinking
-/probe-assume path/to/document.md     # Challenge assumptions
-/probe-evidence path/to/document.md   # Examine evidence
-/probe-pov path/to/document.md        # Alternative viewpoints
-/probe-implications path/to/document.md  # Trace consequences
-/probe-qq path/to/document.md         # Question the question
-```
-
-### Synthesize Existing Evaluations
-
-If you've run individual probes and want to synthesize them:
+Run a specific type of analysis:
 
 ```
-/probe-synthesis ./output-directory
+/probe:clarify path/to/document.md       # Clarify thinking
+/probe:assume path/to/document.md        # Challenge assumptions
+/probe:evidence path/to/document.md      # Examine evidence
+/probe:pov path/to/document.md           # Alternative viewpoints
+/probe:implications path/to/document.md  # Trace consequences
+/probe:qq path/to/document.md            # Question the question
 ```
 
-## The Six Socratic Lenses
+### Synthesize existing evaluations
+
+If you have run individual lenses and want to consolidate them:
+
+```
+/probe:synthesis ./output-directory
+```
+
+## The six lenses
 
 ### 1. Clarify Thinking
 *"What do you mean by...?" / "What is the source of this idea?"*
@@ -174,7 +179,7 @@ If you've run individual probes and want to synthesize them:
 - Identifies questions not asked
 - Proposes alternative framing
 
-## Synthesis Document Structure
+## Synthesis document structure
 
 The synthesis consolidates findings into an actionable format:
 
@@ -189,7 +194,7 @@ The synthesis consolidates findings into an actionable format:
 9. **Stakeholder Questions** - Questions for CEO, CTO, CFO, Product
 10. **Final Verdict** - Ready for action or needs more work?
 
-## Use Cases
+## Use cases
 
 - **Technical proposals** - Evaluate architecture decisions
 - **Business cases** - Challenge ROI assumptions
@@ -203,12 +208,12 @@ The synthesis consolidates findings into an actionable format:
 See [`examples/`](examples/) for a complete run against a realistic decision doc
 (a proposal to adopt a paid feature-flag SaaS). It includes the
 [input](examples/sample-decision.md), all six [lens outputs](examples/output),
-and the [synthesis](examples/output/socratic-synthesis.md), so you can see exactly
+and the [synthesis](examples/output/probe-synthesis.md), so you can see exactly
 what the probe produces, and what it catches, before running your own.
 
 ## The decision-probe loop (where the depth is)
 
-The six lenses are the engine. The real power is running them as a disciplined loop around a decision you are about to lock. `/probe-start` ships with a full methodology section covering:
+The six lenses are the engine. The real power is running them as a disciplined loop around a decision you are about to lock. `/probe:start` ships with a full methodology section covering:
 
 - **When to probe** - schema/money/audit changes, cross-system contracts, dependency locks; and when to skip (anything reversible in under a day).
 - **Scan for an existing decision first** - if a prior ADR already owns the ground, your write-up is an amendment, not a peer.
@@ -216,7 +221,7 @@ The six lenses are the engine. The real power is running them as a disciplined l
 - **Read the synthesis cold** - write your concessions and pushback before touching the original, then respond once with a unified summary.
 - **After the probe** - when to write a v2, when to escalate a thin result, and the spirit-conflict scan for shape-similar prior decisions.
 
-The premise: a one-to-two-hour probe is cheap next to the cost of locking a wrong architectural choice and only discovering it after you have built on top of it. Run `/probe-start` and read the full methodology inline.
+The premise: a two-minute probe is cheap next to the cost of locking a wrong architectural choice and only discovering it after you have built on top of it. Run `/probe:start` and read the full methodology inline.
 
 ## Requirements
 
@@ -229,11 +234,12 @@ MIT License - See [LICENSE](LICENSE) file.
 
 ## Contributing
 
-Contributions welcome! Feel free to:
-- Add new probe types
+Contributions welcome. Feel free to:
+- Add new lenses
 - Improve existing prompts
 - Share interesting use cases
 
 ## Acknowledgments
 
-Inspired by the Socratic method of questioning to examine ideas critically and stimulate deeper thinking.
+Rooted in the Socratic method of questioning, the practice of examining ideas by
+asking what they assume, what supports them, and what they leave out.

@@ -9,7 +9,7 @@ Analyze a document by challenging its assumptions.
 
 ## Usage
 ```
-/probe-assume <path-to-document>
+/probe:assume <path-to-document>
 ```
 
 ## Prompt

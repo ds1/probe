@@ -9,7 +9,7 @@ Analyze a document by discovering alternative viewpoints and conflicts.
 
 ## Usage
 ```
-/probe-pov <path-to-document>
+/probe:pov <path-to-document>
 ```
 
 ## Prompt

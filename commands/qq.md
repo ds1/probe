@@ -9,7 +9,7 @@ Analyze a document by questioning the question itself.
 
 ## Usage
 ```
-/probe-qq <path-to-document>
+/probe:qq <path-to-document>
 ```
 
 ## Prompt

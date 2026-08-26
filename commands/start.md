@@ -9,7 +9,7 @@ Launch 6 parallel Socratic evaluation agents to analyze a document, then synthes
 
 ## Usage
 ```
-/probe-start <path-to-document> <output-directory>
+/probe:start <path-to-document> <output-directory>
 ```
 
 ## Arguments
@@ -28,7 +28,7 @@ Use the Task tool to launch 6 subagents in parallel. Each agent should:
 - Apply their specialized Socratic questioning technique
 - Write their evaluation as a markdown file to the output directory
 
-**Agent 1: Clarify Thinking** -> `socratic-1-clarify-thinking.md`
+**Agent 1: Clarify Thinking** -> `probe-1-clarify-thinking.md`
 Examine arguments by asking: "What do you mean by...?", "What is the source of this idea?", "How did you come to this conclusion?"
 - Identify key claims needing clarification
 - Question definitions and terminology
@@ -36,35 +36,35 @@ Examine arguments by asking: "What do you mean by...?", "What is the source of t
 - Examine reasoning chains
 - Highlight ambiguities
 
-**Agent 2: Challenge Assumptions** -> `socratic-2-challenge-assumptions.md`
+**Agent 2: Challenge Assumptions** -> `probe-2-challenge-assumptions.md`
 Ask: "What are you assuming here?", "How do you know this is true?", "What if you were wrong?"
 - Identify hidden assumptions
 - Question foundational premises
 - Challenge comparison methodology
 - Test robustness of conclusions
 
-**Agent 3: Evidence Basis** -> `socratic-3-evidence-basis.md`
+**Agent 3: Evidence Basis** -> `probe-3-evidence-basis.md`
 Ask: "What evidence supports this?", "Is this evidence sufficient?", "What would disprove this?"
 - Audit sources for bias and reliability
 - Identify unsupported assertions
 - Evaluate evidence quality for key claims
 - Assess completeness of evidence
 
-**Agent 4: Alternative Viewpoints** -> `socratic-4-alternative-viewpoints.md`
+**Agent 4: Alternative Viewpoints** -> `probe-4-alternative-viewpoints.md`
 Ask: "What is the counter-argument?", "Who would disagree?", "What are other ways to look at this?"
 - Present strongest counter-arguments
 - Identify unrepresented stakeholder perspectives
 - Explore internal contradictions
 - Steel-man rejected options
 
-**Agent 5: Implications & Consequences** -> `socratic-5-implications-consequences.md`
+**Agent 5: Implications & Consequences** -> `probe-5-implications-consequences.md`
 Ask: "What follows from this?", "What are the consequences?", "What are the long-term effects?"
 - Trace first and second-order implications
 - Identify unintended consequences
 - Explore consequences of being wrong
 - Map downstream effects
 
-**Agent 6: Question the Question** -> `socratic-6-question-the-question.md`
+**Agent 6: Question the Question** -> `probe-6-question-the-question.md`
 Ask: "Is this the right question?", "What does this question assume?", "What question should we ask instead?"
 - Examine the framing of the research question
 - Challenge scope and timing
@@ -73,7 +73,7 @@ Ask: "Is this the right question?", "What does this question assume?", "What que
 
 ### Step 2: Create Synthesis Document
 
-After all 6 agents complete, read all 6 evaluation files and create `socratic-synthesis.md` in the output directory that consolidates:
+After all 6 agents complete, read all 6 evaluation files and create `probe-synthesis.md` in the output directory that consolidates:
 
 1. **Executive Summary** - Bottom-line assessment in 2-3 sentences
 
@@ -101,7 +101,7 @@ The synthesis should be actionable - providing a clear checklist of what needs v
 
 ## Methodology: the decision-probe loop
 
-The six lenses are the engine. This is the loop that makes them earn their cost on real decisions. A probe takes an hour or two of agent time; that is small next to the cost of locking a wrong architectural choice and discovering it after you have built on top of it. The probe catches what author review misses: bundled decisions, confidence calibrated to a future you cannot see yet, claims asserted but never measured, options that were never put on the table.
+The six lenses are the engine. This is the loop that makes them earn their cost on real decisions. A two-minute probe is cheap next to the cost of locking a wrong architectural choice and discovering it after you have built on top of it. The probe catches what author review misses: bundled decisions, confidence calibrated to a future you cannot see yet, claims asserted but never measured, options that were never put on the table.
 
 ### When to probe
 
@@ -119,7 +119,7 @@ Skip it for reversible work: implementation PRs, bug fixes, copy edits, refactor
 
 1. **Draft the write-up.** Lead with what is blocked and how reversible each option is. Calibrate to the current state, not an imagined future; handle the future with written reversal triggers instead of guesses. Anchor every number with its source: measured, estimated, vendor-cited (with a date), or industry-comparison.
 
-2. **Invoke the probe** on that draft: `/probe-start <doc-path> <output-dir>`. The six agents run independently, with no shared context with you or each other.
+2. **Invoke the probe** on that draft: `/probe:start <doc-path> <output-dir>`. The six agents run independently, with no shared context with you or each other.
 
 3. **Ground the agents in the code when the doc cites code.** If the write-up references specific function names, constant values, file paths, or schema columns, add to each agent's launch prompt: "verify any specific code claims against the actual code at the cited paths; do not take the doc's claims about its own codebase at face value." Without this, agents reason from the prose and miss code-fact bugs. This is not hypothetical: with grounding on, a probe caught a doc claiming a `3 * X` multiplier where the code actually used `4 * X`, a bug the author's own review had read straight past.
 

@@ -9,7 +9,7 @@ Analyze a document by clarifying thinking and exploring the origin of ideas.
 
 ## Usage
 ```
-/probe-clarify <path-to-document>
+/probe:clarify <path-to-document>
 ```
 
 ## Prompt

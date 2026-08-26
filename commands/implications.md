@@ -9,7 +9,7 @@ Analyze a document by exploring implications and consequences.
 
 ## Usage
 ```
-/probe-implications <path-to-document>
+/probe:implications <path-to-document>
 ```
 
 ## Prompt

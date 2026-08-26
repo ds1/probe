@@ -1,12 +1,16 @@
 #!/usr/bin/env bash
-# Socratic Probes installer (macOS / Linux / WSL / Git Bash)
+# Probe installer (macOS / Linux / WSL / Git Bash)
 #
 # Local clone:   ./install.sh
 # One-liner:     curl -fsSL https://raw.githubusercontent.com/ds1/socratic-probes/master/install.sh | bash
+#
+# Installing as a Claude Code plugin is the recommended path; see the README.
+# This script copies the command files into ~/.claude/commands/probe/, where
+# they are invoked as /probe:start, /probe:clarify, and so on.
 set -euo pipefail
 
 REPO_URL="https://github.com/ds1/socratic-probes.git"
-DEST="${HOME}/.claude/commands"
+DEST="${HOME}/.claude/commands/probe"
 
 # Find the command files: prefer a local clone next to this script,
 # otherwise clone the repo into a temp dir (handles the piped one-liner).
@@ -26,8 +30,8 @@ else
 fi
 
 mkdir -p "$DEST"
-cp "$SRC"/probe-*.md "$DEST"/
+cp "$SRC"/*.md "$DEST"/
 
-count="$(ls "$SRC"/probe-*.md | wc -l | tr -d ' ')"
+count="$(ls "$SRC"/*.md | wc -l | tr -d ' ')"
 echo "Installed $count probe commands to $DEST"
-echo "Open Claude Code and run /probe-start <doc> <output-dir> to begin."
+echo "Open Claude Code and run /probe:start <doc> <output-dir> to begin."

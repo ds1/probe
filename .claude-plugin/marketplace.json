@@ -1,18 +1,18 @@
 {
-  "name": "probe-md",
+  "name": "schmitz",
   "owner": {
     "name": "ds1",
     "url": "https://github.com/ds1"
   },
   "metadata": {
-    "description": "Socratic Probes: six-lens Socratic analysis commands for Claude Code. See https://probe.md"
+    "description": "Probe: examine and sharpen concepts from six critical angles, in Claude Code. See https://probe.md"
   },
   "plugins": [
     {
-      "name": "socratic-probes",
+      "name": "probe",
       "source": "./",
-      "displayName": "Socratic Probes",
-      "description": "Six-lens Socratic analysis. Run /socratic-probes:probe-start to launch all six lenses in parallel and synthesize the findings.",
+      "displayName": "Probe",
+      "description": "Six-lens analysis. Run /probe:start to launch all six lenses in parallel and synthesize the findings.",
       "version": "1.0.0"
     }
   ]

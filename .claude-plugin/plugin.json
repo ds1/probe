@@ -1,7 +1,7 @@
 {
-  "name": "socratic-probes",
+  "name": "probe",
   "version": "1.0.0",
-  "description": "Six-lens Socratic analysis for Claude Code. Pressure-test a decision, proposal, or raw idea: six critical lenses run in parallel and synthesize an actionable verdict.",
+  "description": "Examine and sharpen a concept from six critical angles. Six lenses run in parallel and synthesize an actionable verdict.",
   "author": {
     "name": "ds1",
     "url": "https://github.com/ds1"
@@ -9,5 +9,5 @@
   "homepage": "https://probe.md",
   "repository": "https://github.com/ds1/socratic-probes",
   "license": "MIT",
-  "keywords": ["socratic", "analysis", "decision", "review", "critique", "probe"]
+  "keywords": ["probe", "analysis", "decision", "review", "critique", "questioning"]
 }

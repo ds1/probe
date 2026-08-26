@@ -9,7 +9,7 @@ Synthesize findings from existing Socratic evaluation files into a consolidated 
 
 ## Usage
 ```
-/probe-synthesis <directory-containing-evaluations>
+/probe:synthesis <directory-containing-evaluations>
 ```
 
 ## Prompt
@@ -19,14 +19,14 @@ You are synthesizing findings from 6 Socratic evaluations into a comprehensive s
 Look in the directory: $ARGUMENTS
 
 Find and read these evaluation files:
-- `socratic-1-clarify-thinking.md`
-- `socratic-2-challenge-assumptions.md`
-- `socratic-3-evidence-basis.md`
-- `socratic-4-alternative-viewpoints.md`
-- `socratic-5-implications-consequences.md`
-- `socratic-6-question-the-question.md`
+- `probe-1-clarify-thinking.md`
+- `probe-2-challenge-assumptions.md`
+- `probe-3-evidence-basis.md`
+- `probe-4-alternative-viewpoints.md`
+- `probe-5-implications-consequences.md`
+- `probe-6-question-the-question.md`
 
-Create `socratic-synthesis.md` in the same directory that consolidates:
+Create `probe-synthesis.md` in the same directory that consolidates:
 
 1. **Executive Summary** - Bottom-line assessment in 2-3 sentences. What's the verdict?
 

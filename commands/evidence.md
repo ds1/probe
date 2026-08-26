@@ -9,7 +9,7 @@ Analyze a document by examining the evidence and basis for arguments.
 
 ## Usage
 ```
-/probe-evidence <path-to-document>
+/probe:evidence <path-to-document>
 ```
 
 ## Prompt
