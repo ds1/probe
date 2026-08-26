@@ -28,7 +28,7 @@ Use the Task tool to launch 6 subagents in parallel. Each agent should:
 - Apply their specialized Socratic questioning technique
 - Write their evaluation as a markdown file to the output directory
 
-**Agent 1: Clarify Thinking** -> `probe-1-clarify-thinking.md`
+**Agent 1: Clarify Thinking** -> `probe-clarify-thinking.md`
 Examine arguments by asking: "What do you mean by...?", "What is the source of this idea?", "How did you come to this conclusion?"
 - Identify key claims needing clarification
 - Question definitions and terminology
@@ -36,35 +36,35 @@ Examine arguments by asking: "What do you mean by...?", "What is the source of t
 - Examine reasoning chains
 - Highlight ambiguities
 
-**Agent 2: Challenge Assumptions** -> `probe-2-challenge-assumptions.md`
+**Agent 2: Challenge Assumptions** -> `probe-challenge-assumptions.md`
 Ask: "What are you assuming here?", "How do you know this is true?", "What if you were wrong?"
 - Identify hidden assumptions
 - Question foundational premises
 - Challenge comparison methodology
 - Test robustness of conclusions
 
-**Agent 3: Evidence Basis** -> `probe-3-evidence-basis.md`
+**Agent 3: Evidence Basis** -> `probe-evidence-basis.md`
 Ask: "What evidence supports this?", "Is this evidence sufficient?", "What would disprove this?"
 - Audit sources for bias and reliability
 - Identify unsupported assertions
 - Evaluate evidence quality for key claims
 - Assess completeness of evidence
 
-**Agent 4: Alternative Viewpoints** -> `probe-4-alternative-viewpoints.md`
+**Agent 4: Alternative Viewpoints** -> `probe-alternative-viewpoints.md`
 Ask: "What is the counter-argument?", "Who would disagree?", "What are other ways to look at this?"
 - Present strongest counter-arguments
 - Identify unrepresented stakeholder perspectives
 - Explore internal contradictions
 - Steel-man rejected options
 
-**Agent 5: Implications & Consequences** -> `probe-5-implications-consequences.md`
+**Agent 5: Implications & Consequences** -> `probe-implications-consequences.md`
 Ask: "What follows from this?", "What are the consequences?", "What are the long-term effects?"
 - Trace first and second-order implications
 - Identify unintended consequences
 - Explore consequences of being wrong
 - Map downstream effects
 
-**Agent 6: Question the Question** -> `probe-6-question-the-question.md`
+**Agent 6: Question the Question** -> `probe-question-the-question.md`
 Ask: "Is this the right question?", "What does this question assume?", "What question should we ask instead?"
 - Examine the framing of the research question
 - Challenge scope and timing

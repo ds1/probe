@@ -19,12 +19,12 @@ You are synthesizing findings from 6 Socratic evaluations into a comprehensive s
 Look in the directory: $ARGUMENTS
 
 Find and read these evaluation files:
-- `probe-1-clarify-thinking.md`
-- `probe-2-challenge-assumptions.md`
-- `probe-3-evidence-basis.md`
-- `probe-4-alternative-viewpoints.md`
-- `probe-5-implications-consequences.md`
-- `probe-6-question-the-question.md`
+- `probe-clarify-thinking.md`
+- `probe-challenge-assumptions.md`
+- `probe-evidence-basis.md`
+- `probe-alternative-viewpoints.md`
+- `probe-implications-consequences.md`
+- `probe-question-the-question.md`
 
 Create `probe-synthesis.md` in the same directory that consolidates:
 

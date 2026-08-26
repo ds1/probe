@@ -99,12 +99,12 @@ This will:
 3. Create a synthesis document consolidating all findings
 
 **Output files:**
-- `probe-1-clarify-thinking.md`
-- `probe-2-challenge-assumptions.md`
-- `probe-3-evidence-basis.md`
-- `probe-4-alternative-viewpoints.md`
-- `probe-5-implications-consequences.md`
-- `probe-6-question-the-question.md`
+- `probe-clarify-thinking.md`
+- `probe-challenge-assumptions.md`
+- `probe-evidence-basis.md`
+- `probe-alternative-viewpoints.md`
+- `probe-implications-consequences.md`
+- `probe-question-the-question.md`
 - `probe-synthesis.md` (consolidated findings)
 
 ### Individual lenses
