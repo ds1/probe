@@ -1,3 +1,8 @@
+---
+description: Clarify thinking and trace the origin of ideas
+argument-hint: <path-to-document>
+---
+
 # Probe: Clarify Thinking
 
 Analyze a document by clarifying thinking and exploring the origin of ideas.

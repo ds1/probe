@@ -1,3 +1,8 @@
+---
+description: Explore alternative viewpoints and counter-arguments
+argument-hint: <path-to-document>
+---
+
 # Probe: Alternative Points of View
 
 Analyze a document by discovering alternative viewpoints and conflicts.

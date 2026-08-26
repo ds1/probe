@@ -1,3 +1,8 @@
+---
+description: Synthesize existing Socratic evaluation files into one summary
+argument-hint: <directory-containing-evaluations>
+---
+
 # Probe: Synthesis
 
 Synthesize findings from existing Socratic evaluation files into a consolidated summary.

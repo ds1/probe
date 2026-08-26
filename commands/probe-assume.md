@@ -1,3 +1,8 @@
+---
+description: Challenge the hidden assumptions in a document
+argument-hint: <path-to-document>
+---
+
 # Probe: Challenge Assumptions
 
 Analyze a document by challenging its assumptions.

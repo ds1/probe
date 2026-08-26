@@ -1,3 +1,8 @@
+---
+description: Run all six Socratic lenses in parallel and synthesize the findings
+argument-hint: <path-to-document> <output-directory>
+---
+
 # Probe: Full Socratic Analysis
 
 Launch 6 parallel Socratic evaluation agents to analyze a document, then synthesize findings.

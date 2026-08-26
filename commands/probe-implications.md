@@ -1,3 +1,8 @@
+---
+description: Trace the implications and consequences
+argument-hint: <path-to-document>
+---
+
 # Probe: Implications & Consequences
 
 Analyze a document by exploring implications and consequences.

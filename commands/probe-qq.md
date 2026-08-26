@@ -1,3 +1,8 @@
+---
+description: Question whether the document asks the right question
+argument-hint: <path-to-document>
+---
+
 # Probe: Question the Question
 
 Analyze a document by questioning the question itself.

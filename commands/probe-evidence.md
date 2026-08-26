@@ -1,3 +1,8 @@
+---
+description: Examine the evidence quality and sources behind claims
+argument-hint: <path-to-document>
+---
+
 # Probe: Evidence Basis
 
 Analyze a document by examining the evidence and basis for arguments.
