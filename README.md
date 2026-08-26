@@ -6,6 +6,8 @@ page of raw notes; six lenses run in parallel and synthesize an actionable verdi
 
 Live at [probe.md](https://probe.md).
 
+Authored by Dan Schmitz (github.com/@ds1) & Claude.
+
 ## What it does
 
 Each lens is an independent agent asking a different critical question:
