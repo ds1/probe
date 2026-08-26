@@ -19,9 +19,24 @@ These skills apply the Socratic method to critically examine documents through s
 
 ## Installation
 
-### Quickest: one command (global)
+### Recommended: as a Claude Code plugin
 
-Installs all probe commands into `~/.claude/commands`, so they work in every project.
+This repo is a Claude Code plugin marketplace. Inside Claude Code, run:
+
+```
+/plugin marketplace add ds1/socratic-probes
+/plugin install socratic-probes@probe-md
+```
+
+You get versioned, updatable commands. Plugin commands are namespaced under the
+plugin name, so you invoke them as `/socratic-probes:probe-start`,
+`/socratic-probes:probe-assume`, and so on. To update later, bump nothing on your
+end: run `/plugin` and update when a new version is published.
+
+### Alternative: one command (global, un-namespaced)
+
+Copies the command files into `~/.claude/commands`, where they are invoked with
+the bare names `/probe-start`, `/probe-assume`, etc.
 
 **macOS / Linux / WSL / Git Bash:**
 
@@ -34,8 +49,6 @@ curl -fsSL https://raw.githubusercontent.com/ds1/socratic-probes/master/install.
 ```powershell
 irm https://raw.githubusercontent.com/ds1/socratic-probes/master/install.ps1 | iex
 ```
-
-Then open Claude Code and run `/probe-start`.
 
 ### From a clone
 
@@ -51,17 +64,18 @@ cd socratic-probes
 Global (all projects):
 
 ```bash
-cp socratic-probes/.claude/commands/*.md ~/.claude/commands/
+cp socratic-probes/commands/*.md ~/.claude/commands/
 ```
 
 ```powershell
-Copy-Item socratic-probes\.claude\commands\*.md $env:USERPROFILE\.claude\commands\
+Copy-Item socratic-probes\commands\*.md $env:USERPROFILE\.claude\commands\
 ```
 
 Or project-level, so the commands ship with a specific repo:
 
 ```bash
-cp -r socratic-probes/.claude YOUR_PROJECT_ROOT/
+mkdir -p YOUR_PROJECT_ROOT/.claude/commands
+cp socratic-probes/commands/*.md YOUR_PROJECT_ROOT/.claude/commands/
 ```
 
 ## Usage

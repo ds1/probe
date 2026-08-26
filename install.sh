@@ -15,14 +15,14 @@ if [ -n "${BASH_SOURCE[0]:-}" ]; then
   script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 fi
 
-if [ -n "$script_dir" ] && [ -d "$script_dir/.claude/commands" ]; then
-  SRC="$script_dir/.claude/commands"
+if [ -n "$script_dir" ] && [ -d "$script_dir/commands" ]; then
+  SRC="$script_dir/commands"
 else
   tmp="$(mktemp -d)"
   trap 'rm -rf "$tmp"' EXIT
   echo "Cloning $REPO_URL ..."
   git clone --depth 1 "$REPO_URL" "$tmp" >/dev/null 2>&1
-  SRC="$tmp/.claude/commands"
+  SRC="$tmp/commands"
 fi
 
 mkdir -p "$DEST"

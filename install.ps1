@@ -10,13 +10,13 @@ $dest = Join-Path $env:USERPROFILE '.claude\commands'
 # Prefer a local clone next to this script; otherwise clone into a temp dir
 # (handles the piped one-liner, where $PSScriptRoot is empty).
 $src = $null
-if ($PSScriptRoot -and (Test-Path (Join-Path $PSScriptRoot '.claude\commands'))) {
-    $src = Join-Path $PSScriptRoot '.claude\commands'
+if ($PSScriptRoot -and (Test-Path (Join-Path $PSScriptRoot 'commands'))) {
+    $src = Join-Path $PSScriptRoot 'commands'
 } else {
     $tmp = Join-Path ([System.IO.Path]::GetTempPath()) ("socratic-probes-" + [System.Guid]::NewGuid().ToString('N'))
     Write-Host "Cloning $repoUrl ..."
     git clone --depth 1 $repoUrl $tmp 2>&1 | Out-Null
-    $src = Join-Path $tmp '.claude\commands'
+    $src = Join-Path $tmp 'commands'
 }
 
 New-Item -ItemType Directory -Force -Path $dest | Out-Null
