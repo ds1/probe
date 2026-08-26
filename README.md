@@ -19,32 +19,49 @@ These skills apply the Socratic method to critically examine documents through s
 
 ## Installation
 
-### Option 1: Project-Level (Recommended)
+### Quickest: one command (global)
 
-Copy the `.claude/commands` folder to your project root:
+Installs all probe commands into `~/.claude/commands`, so they work in every project.
+
+**macOS / Linux / WSL / Git Bash:**
 
 ```bash
-# Clone or download this repo
-git clone https://github.com/YOUR_USERNAME/socratic-probes.git
-
-# Copy to your project
-cp -r socratic-probes/.claude YOUR_PROJECT_ROOT/
+curl -fsSL https://raw.githubusercontent.com/ds1/socratic-probes/master/install.sh | bash
 ```
 
-The skills will be available when you run Claude Code in that project directory.
+**Windows PowerShell:**
 
-### Option 2: User-Level (Global)
+```powershell
+irm https://raw.githubusercontent.com/ds1/socratic-probes/master/install.ps1 | iex
+```
 
-Copy the command files to your global Claude Code commands folder:
+Then open Claude Code and run `/probe-start`.
 
-**macOS/Linux:**
+### From a clone
+
+```bash
+git clone https://github.com/ds1/socratic-probes.git
+cd socratic-probes
+./install.sh          # macOS / Linux / WSL / Git Bash
+# or on Windows:  .\install.ps1
+```
+
+### Manual copy
+
+Global (all projects):
+
 ```bash
 cp socratic-probes/.claude/commands/*.md ~/.claude/commands/
 ```
 
-**Windows:**
 ```powershell
 Copy-Item socratic-probes\.claude\commands\*.md $env:USERPROFILE\.claude\commands\
+```
+
+Or project-level, so the commands ship with a specific repo:
+
+```bash
+cp -r socratic-probes/.claude YOUR_PROJECT_ROOT/
 ```
 
 ## Usage
@@ -166,6 +183,18 @@ The synthesis consolidates findings into an actionable format:
 - **Strategy documents** - Explore alternatives
 - **RFCs/ADRs** - Rigorous review before adoption
 - **Vendor evaluations** - Identify bias and gaps
+
+## The decision-probe loop (where the depth is)
+
+The six lenses are the engine. The real power is running them as a disciplined loop around a decision you are about to lock. `/probe-start` ships with a full methodology section covering:
+
+- **When to probe** - schema/money/audit changes, cross-system contracts, dependency locks; and when to skip (anything reversible in under a day).
+- **Scan for an existing decision first** - if a prior ADR already owns the ground, your write-up is an amendment, not a peer.
+- **Ground the agents in the code** - when a doc cites function names or constants, tell each agent to verify against the actual code. This catches code-fact bugs that reasoning-from-prose misses (a real probe caught a doc claiming a `3 * X` multiplier where the code used `4 * X`).
+- **Read the synthesis cold** - write your concessions and pushback before touching the original, then respond once with a unified summary.
+- **After the probe** - when to write a v2, when to escalate a thin result, and the spirit-conflict scan for shape-similar prior decisions.
+
+The premise: a one-to-two-hour probe is cheap next to the cost of locking a wrong architectural choice and only discovering it after you have built on top of it. Run `/probe-start` and read the full methodology inline.
 
 ## Requirements
 
