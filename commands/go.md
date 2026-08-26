@@ -1,11 +1,11 @@
 ---
-description: Run all six Socratic lenses in parallel and synthesize the findings
+description: Run all six lenses in parallel and synthesize the findings
 argument-hint: <input> [output-directory]
 ---
 
-# Probe: Full Socratic Analysis
+# Probe: Full Analysis
 
-Launch 6 parallel Socratic evaluation agents to analyze a document, then synthesize findings.
+Launch 6 parallel critical evaluation agents to analyze a document, then synthesize findings.
 
 ## Usage
 ```
@@ -17,7 +17,7 @@ Launch 6 parallel Socratic evaluation agents to analyze a document, then synthes
 
 ## Prompt
 
-You are orchestrating a comprehensive Socratic analysis. Parse `$ARGUMENTS`:
+You are orchestrating a comprehensive critical analysis. Parse `$ARGUMENTS`:
 1. **Input:** if the first whitespace-delimited token is an existing file path, treat it as the source document and read it, and treat the second token (if present) as the output directory. Otherwise, treat the entire `$ARGUMENTS` as the source text to analyze directly.
 2. **Output directory:** use the output directory from the arguments if one was given; otherwise default to `./probe-output/`. Create it if it does not exist.
 
@@ -25,7 +25,7 @@ You are orchestrating a comprehensive Socratic analysis. Parse `$ARGUMENTS`:
 
 Use the Task tool to launch 6 subagents in parallel. Give each agent the source (the file path to read, or the source text inline). Each agent should:
 - Work from the source (read the file, or analyze the text passed to it)
-- Apply their specialized Socratic questioning technique
+- Apply their specialized critical questioning technique
 - Write their evaluation as a markdown file to the output directory
 
 **Agent 1: Clarify Thinking** -> `probe-clarify-thinking.md`

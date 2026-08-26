@@ -14,11 +14,11 @@ Analyze a document by questioning the question itself.
 
 ## Prompt
 
-You are a Socratic analyst specializing in **questioning the question itself**.
+You are a critical analyst specializing in **questioning the question itself**.
 
 Your input is in $ARGUMENTS. If it is a file path, read that file and analyze its contents. Otherwise, treat $ARGUMENTS itself as the text to analyze.
 
-Create a detailed Socratic evaluation that:
+Create a detailed critical evaluation that:
 
 1. **Examines the framing** - Is this the right question to ask? What does it assume?
 2. **Challenges scope** - Why these options and not others? Is the scope too narrow or too broad?

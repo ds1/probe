@@ -7,7 +7,7 @@
     "url": "https://github.com/ds1"
   },
   "homepage": "https://probe.md",
-  "repository": "https://github.com/ds1/socratic-probes",
+  "repository": "https://github.com/ds1/probe",
   "license": "MIT",
   "keywords": ["probe", "analysis", "decision", "review", "critique", "questioning"]
 }

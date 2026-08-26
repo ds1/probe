@@ -2,14 +2,14 @@
 # Probe installer (macOS / Linux / WSL / Git Bash)
 #
 # Local clone:   ./install.sh
-# One-liner:     curl -fsSL https://raw.githubusercontent.com/ds1/socratic-probes/master/install.sh | bash
+# One-liner:     curl -fsSL https://raw.githubusercontent.com/ds1/probe/master/install.sh | bash
 #
 # Installing as a Claude Code plugin is the recommended path; see the README.
 # This script copies the command files into ~/.claude/commands/probe/, where
 # they are invoked as /probe:go, /probe:clarify, and so on.
 set -euo pipefail
 
-REPO_URL="https://github.com/ds1/socratic-probes.git"
+REPO_URL="https://github.com/ds1/probe.git"
 DEST="${HOME}/.claude/commands/probe"
 
 # Find the command files: prefer a local clone next to this script,

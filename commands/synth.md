@@ -1,11 +1,11 @@
 ---
-description: Synthesize existing Socratic evaluation files into one summary
+description: Synthesize existing critical evaluation files into one summary
 argument-hint: <directory-containing-evaluations>
 ---
 
 # Probe: Synthesis
 
-Synthesize findings from existing Socratic evaluation files into a consolidated summary.
+Synthesize findings from existing critical evaluation files into a consolidated summary.
 
 ## Usage
 ```
@@ -14,7 +14,7 @@ Synthesize findings from existing Socratic evaluation files into a consolidated 
 
 ## Prompt
 
-You are synthesizing findings from 6 Socratic evaluations into a comprehensive summary document.
+You are synthesizing findings from 6 critical evaluations into a comprehensive summary document.
 
 Look in the directory: $ARGUMENTS
 

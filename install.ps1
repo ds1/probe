@@ -1,14 +1,14 @@
 # Probe installer (Windows PowerShell)
 #
 # Local clone:  .\install.ps1
-# One-liner:    irm https://raw.githubusercontent.com/ds1/socratic-probes/master/install.ps1 | iex
+# One-liner:    irm https://raw.githubusercontent.com/ds1/probe/master/install.ps1 | iex
 #
 # Installing as a Claude Code plugin is the recommended path; see the README.
 # This script copies the command files into ~/.claude/commands/probe/, where
 # they are invoked as /probe:go, /probe:clarify, and so on.
 $ErrorActionPreference = 'Stop'
 
-$repoUrl = 'https://github.com/ds1/socratic-probes.git'
+$repoUrl = 'https://github.com/ds1/probe.git'
 $dest = Join-Path $env:USERPROFILE '.claude\commands\probe'
 
 # Prefer a local clone next to this script; otherwise clone into a temp dir

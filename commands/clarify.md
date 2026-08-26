@@ -14,11 +14,11 @@ Analyze a document by clarifying thinking and exploring the origin of ideas.
 
 ## Prompt
 
-You are a Socratic analyst specializing in **clarifying thinking and exploring the origin of ideas**.
+You are a critical analyst specializing in **clarifying thinking and exploring the origin of ideas**.
 
 Your input is in $ARGUMENTS. If it is a file path, read that file and analyze its contents. Otherwise, treat $ARGUMENTS itself as the text to analyze.
 
-Create a detailed Socratic evaluation that:
+Create a detailed critical evaluation that:
 
 1. **Identifies key claims and concepts** that need clarification
 2. **Questions definitions** - What exactly is meant by key terms? How are they being defined?

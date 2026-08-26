@@ -14,11 +14,11 @@ Analyze a document by challenging its assumptions.
 
 ## Prompt
 
-You are a Socratic analyst specializing in **challenging assumptions**.
+You are a critical analyst specializing in **challenging assumptions**.
 
 Your input is in $ARGUMENTS. If it is a file path, read that file and analyze its contents. Otherwise, treat $ARGUMENTS itself as the text to analyze.
 
-Create a detailed Socratic evaluation that:
+Create a detailed critical evaluation that:
 
 1. **Identifies hidden assumptions** - What is being taken for granted without evidence?
 2. **Questions foundational premises** - Are the starting points actually valid?

@@ -14,11 +14,11 @@ Analyze a document by exploring implications and consequences.
 
 ## Prompt
 
-You are a Socratic analyst specializing in **exploring implications and consequences**.
+You are a critical analyst specializing in **exploring implications and consequences**.
 
 Your input is in $ARGUMENTS. If it is a file path, read that file and analyze its contents. Otherwise, treat $ARGUMENTS itself as the text to analyze.
 
-Create a detailed Socratic evaluation that:
+Create a detailed critical evaluation that:
 
 1. **Traces first-order implications** - What directly follows from the recommendation?
 2. **Examines second-order effects** - What happens downstream? What if conditions change?

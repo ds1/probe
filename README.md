@@ -28,7 +28,7 @@ Each lens is an independent agent asking a different critical question:
 This repo is a Claude Code plugin marketplace. Inside Claude Code, run:
 
 ```
-/plugin marketplace add ds1/socratic-probes
+/plugin marketplace add ds1/probe
 /plugin install probe@schmitz
 ```
 
@@ -44,20 +44,20 @@ the same way, `/probe:go`, `/probe:clarify`, etc.
 **macOS / Linux / WSL / Git Bash:**
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/ds1/socratic-probes/master/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/ds1/probe/master/install.sh | bash
 ```
 
 **Windows PowerShell:**
 
 ```powershell
-irm https://raw.githubusercontent.com/ds1/socratic-probes/master/install.ps1 | iex
+irm https://raw.githubusercontent.com/ds1/probe/master/install.ps1 | iex
 ```
 
 ### From a clone
 
 ```bash
-git clone https://github.com/ds1/socratic-probes.git
-cd socratic-probes
+git clone https://github.com/ds1/probe.git
+cd probe
 ./install.sh          # macOS / Linux / WSL / Git Bash
 # or on Windows:  .\install.ps1
 ```
@@ -68,19 +68,19 @@ Global (all projects):
 
 ```bash
 mkdir -p ~/.claude/commands/probe
-cp socratic-probes/commands/*.md ~/.claude/commands/probe/
+cp probe/commands/*.md ~/.claude/commands/probe/
 ```
 
 ```powershell
 New-Item -ItemType Directory -Force $env:USERPROFILE\.claude\commands\probe
-Copy-Item socratic-probes\commands\*.md $env:USERPROFILE\.claude\commands\probe\
+Copy-Item probe\commands\*.md $env:USERPROFILE\.claude\commands\probe\
 ```
 
 Or project-level, so the commands ship with a specific repo:
 
 ```bash
 mkdir -p YOUR_PROJECT_ROOT/.claude/commands/probe
-cp socratic-probes/commands/*.md YOUR_PROJECT_ROOT/.claude/commands/probe/
+cp probe/commands/*.md YOUR_PROJECT_ROOT/.claude/commands/probe/
 ```
 
 ## Usage
@@ -243,5 +243,5 @@ Contributions welcome. Feel free to:
 
 ## Acknowledgments
 
-Rooted in the Socratic method of questioning, the practice of examining ideas by
-asking what they assume, what supports them, and what they leave out.
+Rooted in a long tradition of examining ideas by asking what they assume, what
+supports them, and what they leave out.
