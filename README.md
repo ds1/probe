@@ -184,6 +184,14 @@ The synthesis consolidates findings into an actionable format:
 - **RFCs/ADRs** - Rigorous review before adoption
 - **Vendor evaluations** - Identify bias and gaps
 
+## Example walkthrough
+
+See [`examples/`](examples/) for a complete run against a realistic decision doc
+(a proposal to adopt a paid feature-flag SaaS). It includes the
+[input](examples/sample-decision.md), all six [lens outputs](examples/output),
+and the [synthesis](examples/output/socratic-synthesis.md), so you can see exactly
+what the probe produces, and what it catches, before running your own.
+
 ## The decision-probe loop (where the depth is)
 
 The six lenses are the engine. The real power is running them as a disciplined loop around a decision you are about to lock. `/probe-start` ships with a full methodology section covering:
