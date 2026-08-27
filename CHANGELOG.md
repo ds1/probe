@@ -3,6 +3,16 @@
 All notable changes to this plugin. Versions follow semver and must match in both
 `.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json`.
 
+## 1.2.0 - 2026-08-26
+
+### Changed
+- Marketplace and plugin metadata refreshed for discoverability: lowercase `probe`
+  display name, fuller `/probe` descriptions, and owner/author contact details.
+
+### Added
+- Expanded `keywords` plus matching `tags`, a `thinking-tools` category, and
+  `defaultEnabled` in `plugin.json`.
+
 ## 1.1.0 - 2026-08-26
 
 ### Changed

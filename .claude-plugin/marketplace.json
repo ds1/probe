@@ -1,19 +1,25 @@
 {
   "name": "schmitz",
   "owner": {
-    "name": "ds1",
-    "url": "https://github.com/ds1"
+    "name": "Dan Schmitz",
+    "url": "https://github.com/ds1",
+    "email": "plugins@schmitz.ai"
   },
   "metadata": {
-    "description": "Probe: examine and sharpen concepts from six critical angles, in Claude Code. See https://probe.md"
+    "description": "Probe: examine and sharpen concepts from six critical angles, in Claude Code."
   },
   "plugins": [
     {
       "name": "probe",
       "source": "./",
-      "displayName": "Probe",
-      "description": "Six-lens analysis. Run /probe:go to launch all six lenses in parallel and synthesize the findings.",
-      "version": "1.1.0"
+      "displayName": "probe",
+      "description": "Use /probe to have agents sharpen ideas at any stage, like when your thinking is still raw and messy or after each draft is written. It can run six critical agents individually or in parallel and synthesizes an actionable verdict. Run /probe:go to launch all six lenses in parallel and synthesize the findings. Learn more at https://probe.md ",
+      "version": "1.2.0",
+      "author": {
+        "name": "Dan Schmitz",
+        "email": "dan@schmitz.ai",
+        "url": "https://github.com/ds1"
+      }
     }
   ]
 }

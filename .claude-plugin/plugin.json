@@ -1,7 +1,7 @@
 {
   "name": "probe",
-  "version": "1.1.0",
-  "description": "Examine and sharpen a concept from six critical angles. Six lenses run in parallel and synthesize an actionable verdict.",
+  "version": "1.2.0",
+  "description": "Examine and sharpen a concept from six critical angles. Six agents probe then synthesize an actionable verdict.",
   "author": {
     "name": "ds1",
     "url": "https://github.com/ds1"
@@ -9,5 +9,8 @@
   "homepage": "https://probe.md",
   "repository": "https://github.com/ds1/probe",
   "license": "MIT",
-  "keywords": ["probe", "analysis", "decision", "review", "critique", "questioning"]
+  "keywords": ["skills", "collaboration", "probe", "brainstorm", "explore", "analysis", "decision", "review", "critique", "questioning", "challenge", "reasoning", "synthesize", "expert", "evaluate"],
+  "tags": ["skills", "collaboration", "probe", "brainstorm", "explore", "analysis", "decision", "review", "critique", "questioning", "challenge", "reasoning", "synthesize", "expert", "evaluate"],
+  "category": "thinking-tools",
+  "defaultEnabled": true
 }
