@@ -1,8 +1,8 @@
-# Probe
+# probe
 
-A set of Claude Code slash commands that examine and sharpen a concept from six
-critical angles. Point them at a decision, a proposal, a research write-up, or a
-page of raw notes; six lenses run in parallel and synthesize an actionable verdict.
+A Claude Marketplace Plugin comprising a set of Claude Code slash commands that examine and sharpen a concept from six
+critical angles. Point them at a decision, a proposal, a research write-up, a
+page of raw notes, or a pasted paragraph of text; six lenses run in parallel or individually and synthesize an actionable verdict.
 
 Live at [probe.md](https://probe.md).
 
