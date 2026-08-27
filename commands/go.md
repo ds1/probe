@@ -1,138 +1,48 @@
 ---
 description: Run all six lenses in parallel and synthesize the findings
-argument-hint: <input> [output-directory]
+argument-hint: <input> [output-directory] [--out <dir>]
 ---
 
 # Probe: Full Analysis
 
-Launch 6 parallel critical evaluation agents to analyze a document, then synthesize findings.
-
-## Usage
-```
-/probe:go <input> [output-directory]
-```
+Run six independent lens agents against one input, then synthesize their findings. Each lens prompt lives in its own agent under `agents/`; this command only parses arguments, launches, and reports.
 
 ## Arguments
-- `$ARGUMENTS` - The input to analyze, optionally followed by an output directory. The input is either a file path or a pasted body of text.
 
-## Prompt
+`$ARGUMENTS` holds the input and, optionally, an output directory. Parse it in this order:
 
-You are orchestrating a comprehensive critical analysis. Parse `$ARGUMENTS`:
-1. **Input:** if the first whitespace-delimited token is an existing file path, treat it as the source document and read it, and treat the second token (if present) as the output directory. Otherwise, treat the entire `$ARGUMENTS` as the source text to analyze directly.
-2. **Output directory:** use the output directory from the arguments if one was given; otherwise default to `./probe-output/`. Create it if it does not exist.
+1. If `--out <dir>` appears anywhere, that is the output directory. Remove it before the next step.
+2. If what remains starts with a quoted string, the quoted string is the input path. Otherwise, if the first whitespace-delimited token is an existing file, that token is the input path, and a second token (when present and no `--out` was given) is the output directory.
+3. If neither matched, the entire remaining text is the input, to be analyzed directly as pasted text.
+4. If no output directory was given, use `./probe-output/`. Create it if it does not exist.
 
-### Step 1: Launch 6 Parallel Analysis Agents
+Paths that contain spaces must be quoted.
 
-Use the Task tool to launch 6 subagents in parallel. Give each agent the source (the file path to read, or the source text inline). Each agent should:
-- Work from the source (read the file, or analyze the text passed to it)
-- Apply their specialized critical questioning technique
-- Write their evaluation as a markdown file to the output directory
+## Step 1: launch the six lenses in parallel
 
-**Agent 1: Clarify Thinking** -> `probe-clarify-thinking.md`
-Examine arguments by asking: "What do you mean by...?", "What is the source of this idea?", "How did you come to this conclusion?"
-- Identify key claims needing clarification
-- Question definitions and terminology
-- Trace origin of conclusions (primary research vs. inference)
-- Examine reasoning chains
-- Highlight ambiguities
+Use the Agent tool to launch all six subagents in a single message so they run concurrently. They share no context with each other or with you.
 
-**Agent 2: Challenge Assumptions** -> `probe-challenge-assumptions.md`
-Ask: "What are you assuming here?", "How do you know this is true?", "What if you were wrong?"
-- Identify hidden assumptions
-- Question foundational premises
-- Challenge comparison methodology
-- Test robustness of conclusions
+| `subagent_type` | writes |
+|---|---|
+| `probe:clarify-thinking` | `probe-clarify-thinking.md` |
+| `probe:challenge-assumptions` | `probe-challenge-assumptions.md` |
+| `probe:evidence-basis` | `probe-evidence-basis.md` |
+| `probe:alternative-viewpoints` | `probe-alternative-viewpoints.md` |
+| `probe:implications-consequences` | `probe-implications-consequences.md` |
+| `probe:question-the-question` | `probe-question-the-question.md` |
 
-**Agent 3: Evidence Basis** -> `probe-evidence-basis.md`
-Ask: "What evidence supports this?", "Is this evidence sufficient?", "What would disprove this?"
-- Audit sources for bias and reliability
-- Identify unsupported assertions
-- Evaluate evidence quality for key claims
-- Assess completeness of evidence
+If the `probe:`-prefixed agent types are not available (the files were installed by script rather than as a plugin), use the same name without the prefix.
 
-**Agent 4: Alternative Viewpoints** -> `probe-alternative-viewpoints.md`
-Ask: "What is the counter-argument?", "Who would disagree?", "What are other ways to look at this?"
-- Present strongest counter-arguments
-- Identify unrepresented stakeholder perspectives
-- Explore internal contradictions
-- Steel-man rejected options
+Give every agent the same launch prompt, varying only the output file name:
 
-**Agent 5: Implications & Consequences** -> `probe-implications-consequences.md`
-Ask: "What follows from this?", "What are the consequences?", "What are the long-term effects?"
-- Trace first and second-order implications
-- Identify unintended consequences
-- Explore consequences of being wrong
-- Map downstream effects
+- **Source**: the input path to read, or the full pasted text.
+- **Output**: `<output-dir>/<file from the table>`.
+- **Grounding**: if the source cites function names, constants, file paths, or schema columns, add: "Verify any specific code claims against the actual code at the cited paths; do not take the source's claims about its own codebase at face value."
 
-**Agent 6: Question the Question** -> `probe-question-the-question.md`
-Ask: "Is this the right question?", "What does this question assume?", "What question should we ask instead?"
-- Examine the framing of the research question
-- Challenge scope and timing
-- Identify questions not asked
-- Propose alternative framing
+## Step 2: synthesize
 
-### Step 2: Create Synthesis Document
+When all six have finished, launch `probe:synthesis` (or `synthesis`) with **Directory**: `<output-dir>`. It reads the lens files present and writes `probe-synthesis.md`.
 
-After all 6 agents complete, read all 6 evaluation files and create `probe-synthesis.md` in the output directory that consolidates:
+## Step 3: report
 
-1. **Executive Summary** - Bottom-line assessment in 2-3 sentences
-
-2. **Critical Findings Table** - One row per evaluation summarizing the key insight:
-   | # | Evaluation | Key Finding |
-   |---|------------|-------------|
-
-3. **Evidence Quality Assessment** - Summary of source reliability and gaps
-
-4. **Assumption Risk Matrix** - Key assumptions and what happens if they're wrong
-
-5. **Unexplored Alternatives** - Options the original document didn't consider
-
-6. **Hidden Costs & Consequences** - Implications not addressed in the original
-
-7. **The Meta-Question** - Is the original document asking the right question?
-
-8. **Decision Framework** - What should be validated before proceeding
-
-9. **Stakeholder Questions** - Key questions for CEO, CTO, CFO, Product
-
-10. **Final Verdict** - Assessment of whether the recommendation is ready for action
-
-The synthesis should be actionable - providing a clear checklist of what needs validation before the recommendation can be confidently accepted or rejected.
-
-## Methodology: the decision-probe loop
-
-The six lenses are the engine. This is the loop that makes them earn their cost on real decisions. A two-minute probe is cheap next to the cost of locking a wrong architectural choice and discovering it after you have built on top of it. The probe catches what author review misses: bundled decisions, confidence calibrated to a future you cannot see yet, claims asserted but never measured, options that were never put on the table.
-
-### When to probe
-
-Probe a decision before you lock it when it:
-- changes a schema, a money flow, or an audit trail
-- sets a cross-system contract (an API shape, an SDK surface, a versioning boundary)
-- locks in a dependency (a vendor, a framework, a test stack)
-- is the kind of thing you would write down as a numbered, hard-to-reverse decision (an ADR)
-
-Skip it for reversible work: implementation PRs, bug fixes, copy edits, refactors that do not change behavior, anything you could undo in under a day.
-
-### The loop
-
-0. **Scan for an existing decision first.** Before drafting, search your decision log (an ADR folder, a DECISIONS.md, whatever you keep) for the nouns of the capability and their synonyms. If a prior decision already owns this ground, your draft is an AMENDMENT to it: cite it in the first paragraph and keep or explicitly amend its invariants by name. It is never a peer. (A real probe once spent all six of its sharpest findings pointing out that a draft had silently re-decided something an existing decision already governed.)
-
-1. **Draft the write-up.** Lead with what is blocked and how reversible each option is. Calibrate to the current state, not an imagined future; handle the future with written reversal triggers instead of guesses. Anchor every number with its source: measured, estimated, vendor-cited (with a date), or industry-comparison.
-
-2. **Invoke the probe** on that draft: `/probe:go <input> <output-dir>`. The six agents run independently, with no shared context with you or each other.
-
-3. **Ground the agents in the code when the doc cites code.** If the write-up references specific function names, constant values, file paths, or schema columns, add to each agent's launch prompt: "verify any specific code claims against the actual code at the cited paths; do not take the doc's claims about its own codebase at face value." Without this, agents reason from the prose and miss code-fact bugs. This is not hypothetical: with grounding on, a probe caught a doc claiming a `3 * X` multiplier where the code actually used `4 * X`, a bug the author's own review had read straight past.
-
-4. **Read the synthesis cold.** Write down where the probe was right (concessions) and where it overcorrected (pushback) before you touch the original.
-
-5. **Respond once.** Bring the original recommendation, a five-to-ten-line probe summary, your updated thinking, and a path to the revised doc into a single message. One synthesis of the loop, not three fragments.
-
-### After the probe
-
-- **Load-bearing gaps found:** write a v2 of the doc calibrated on the corrections. Do not silently auto-rewrite; surfacing the concessions is itself part of the decision.
-- **Thin synthesis because the doc was thin:** escalate with the partial result rather than re-probing. Re-probing shallow input just burns runs.
-- **Spirit-conflict scan.** Before you commit to a paid dependency or a cross-cutting change, look through the decision log for shape-similar prior calls. One often encodes a constraint that should carry over (a "no paid X before revenue" rule on the data side should make you suspicious of paid X on the infra side too).
-
-### Why it earns its cost
-
-Run the same doc through a probe you triggered deliberately and one triggered automatically and the findings overlap about 85 to 90 percent, with the same verdict; the differences show up only on the depth axis. The quality holds regardless of what triggered it, and it repeatedly finds real bugs that author review shipped past.
+Reply with the synthesis agent's executive summary and final verdict, the output directory, and the list of files written. Do not paste the evaluations inline.

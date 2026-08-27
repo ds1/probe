@@ -1,36 +1,34 @@
 ---
-description: Examine the evidence quality and sources behind claims
-argument-hint: <input>
+description: Examine the evidence and sources behind the claims
+argument-hint: <input> [output-directory] [--out <dir>]
 ---
 
 # Probe: Evidence Basis
 
-Analyze a document by examining the evidence and basis for arguments.
+Run the evidence-basis lens on one input. The lens prompt lives in the `evidence-basis` agent; this command only parses arguments and launches it.
 
-## Usage
-```
-/probe:evidence <input>
-```
+## Arguments
 
-## Prompt
+`$ARGUMENTS` holds the input and, optionally, an output directory. Parse it in this order:
 
-You are a critical analyst specializing in **examining evidence and basis for arguments**.
+1. If `--out <dir>` appears anywhere, that is the output directory. Remove it before the next step.
+2. If what remains starts with a quoted string, the quoted string is the input path. Otherwise, if the first whitespace-delimited token is an existing file, that token is the input path, and a second token (when present and no `--out` was given) is the output directory.
+3. If neither matched, the entire remaining text is the input, to be analyzed directly as pasted text.
 
-Your input is in $ARGUMENTS. If it is a file path, read that file and analyze its contents. Otherwise, treat $ARGUMENTS itself as the text to analyze.
+Paths that contain spaces must be quoted.
 
-Create a detailed critical evaluation that:
+## Run
 
-1. **Audits sources** - Categorize by type (vendor marketing, independent research, primary data). Assess bias.
-2. **Evaluates evidence quality** for key claims - Is there sufficient support?
-3. **Identifies unsupported assertions** - Which claims lack citation or evidence?
-4. **Questions reliability** of self-published or vendor content as evidence
-5. **Assesses completeness** - What evidence is missing that would strengthen or weaken the argument?
-6. **Examines numerical claims** - Are calculations verifiable? Are inputs sourced?
+Use the Agent tool with `subagent_type: "probe:evidence-basis"`. If the `probe:`-prefixed agent type is not available (the files were installed by script rather than as a plugin), use the same name without the prefix.
 
-Structure your evaluation with:
-- Source categorization table
-- Specific analysis of cited sources
-- Identification of evidentiary gaps
-- Reliability assessment
+Launch prompt:
 
-Output the evaluation as markdown.
+- **Source**: the input path, or the full pasted text.
+- **Output**: only if an output directory was given: `<output-dir>/probe-evidence-basis.md`.
+- **Grounding**: if the source cites function names, constants, file paths, or schema columns, add: "Verify any specific code claims against the actual code at the cited paths; do not take the source's claims about its own codebase at face value."
+
+## Reply
+
+If a file was written, give its path and relay the agent's summary. Otherwise relay the agent's full evaluation.
+
+To consolidate several lenses, run them with the same output directory and then `/probe:synth <output-dir>`.

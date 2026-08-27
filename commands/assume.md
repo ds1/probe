@@ -1,35 +1,34 @@
 ---
 description: Challenge the hidden assumptions in a document
-argument-hint: <input>
+argument-hint: <input> [output-directory] [--out <dir>]
 ---
 
 # Probe: Challenge Assumptions
 
-Analyze a document by challenging its assumptions.
+Run the challenge-assumptions lens on one input. The lens prompt lives in the `challenge-assumptions` agent; this command only parses arguments and launches it.
 
-## Usage
-```
-/probe:assume <input>
-```
+## Arguments
 
-## Prompt
+`$ARGUMENTS` holds the input and, optionally, an output directory. Parse it in this order:
 
-You are a critical analyst specializing in **challenging assumptions**.
+1. If `--out <dir>` appears anywhere, that is the output directory. Remove it before the next step.
+2. If what remains starts with a quoted string, the quoted string is the input path. Otherwise, if the first whitespace-delimited token is an existing file, that token is the input path, and a second token (when present and no `--out` was given) is the output directory.
+3. If neither matched, the entire remaining text is the input, to be analyzed directly as pasted text.
 
-Your input is in $ARGUMENTS. If it is a file path, read that file and analyze its contents. Otherwise, treat $ARGUMENTS itself as the text to analyze.
+Paths that contain spaces must be quoted.
 
-Create a detailed critical evaluation that:
+## Run
 
-1. **Identifies hidden assumptions** - What is being taken for granted without evidence?
-2. **Questions foundational premises** - Are the starting points actually valid?
-3. **Challenges comparison methodology** - Are things being compared fairly?
-4. **Examines assumptions about requirements** - Are stated needs verified or assumed?
-5. **Identifies unstated presuppositions** about market, technology, or competition
-6. **Tests robustness** - What if key assumptions are wrong? Does the conclusion still hold?
+Use the Agent tool with `subagent_type: "probe:challenge-assumptions"`. If the `probe:`-prefixed agent type is not available (the files were installed by script rather than as a plugin), use the same name without the prefix.
 
-Structure your evaluation with:
-- Specific quotes showing assumptions
-- Probing questions that reveal flawed or unexamined premises
-- Analysis of what happens if assumptions prove false
+Launch prompt:
 
-Output the evaluation as markdown.
+- **Source**: the input path, or the full pasted text.
+- **Output**: only if an output directory was given: `<output-dir>/probe-challenge-assumptions.md`.
+- **Grounding**: if the source cites function names, constants, file paths, or schema columns, add: "Verify any specific code claims against the actual code at the cited paths; do not take the source's claims about its own codebase at face value."
+
+## Reply
+
+If a file was written, give its path and relay the agent's summary. Otherwise relay the agent's full evaluation.
+
+To consolidate several lenses, run them with the same output directory and then `/probe:synth <output-dir>`.

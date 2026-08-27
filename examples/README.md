@@ -15,7 +15,7 @@ an unquantified "flag volume will only grow."
 ## The command
 
 ```
-/probe:go examples/sample-decision.md examples/output
+/probe:go examples/sample-decision.md --out examples/output
 ```
 
 ## The output
@@ -25,13 +25,13 @@ Six independent lens evaluations plus a consolidated synthesis, all in
 
 | File | Lens | What it caught |
 |------|------|----------------|
-| [`probe-clarify-thinking.md`](output/probe-clarify-thinking.md) | Clarify Thinking | "Proper feature flags" bundles four different capabilities; the requirement is never defined |
-| [`probe-challenge-assumptions.md`](output/probe-challenge-assumptions.md) | Challenge Assumptions | Cost is loaded asymmetrically onto build; the case rests on an unquantified growth assumption |
-| [`probe-evidence-basis.md`](output/probe-evidence-basis.md) | Evidence Basis | Every number is unsourced or self-contradicting |
-| [`probe-alternative-viewpoints.md`](output/probe-alternative-viewpoints.md) | Alternative Viewpoints | False binary; open-source and a minimal flag store are missing |
-| [`probe-implications-consequences.md`](output/probe-implications-consequences.md) | Implications | Recurring cost scales with headcount; lock-in rises with every flag; fail mode unspecified |
-| [`probe-question-the-question.md`](output/probe-question-the-question.md) | Question the Question | It answers "which vendor?" before settling "do we need a platform yet?" |
-| [`probe-synthesis.md`](output/probe-synthesis.md) | Synthesis | Verdict, risk matrix, and a validate-before-proceeding checklist |
+| [`probe-clarify-thinking.md`](output/probe-clarify-thinking.md) | Clarify Thinking | The requirement drifts from "toggle at runtime" to "full targeting platform" without acknowledgment; "proper" and "real" are conclusions disguised as descriptions |
+| [`probe-challenge-assumptions.md`](output/probe-challenge-assumptions.md) | Challenge Assumptions | The conclusion needs four unshown things to all be true; each is plausible, none is demonstrated, and the memo requires all of them |
+| [`probe-evidence-basis.md`](output/probe-evidence-basis.md) | Evidence Basis | No citations, measurements, or dated inputs; the load-bearing cost sentence compares one unstated number to another |
+| [`probe-alternative-viewpoints.md`](output/probe-alternative-viewpoints.md) | Alternative Viewpoints | At least five credible options were never named; no perspective outside the Platform team appears |
+| [`probe-implications-consequences.md`](output/probe-implications-consequences.md) | Implications | Reversibility decays with success: a one-day rollback at month 1 becomes a quarter of work by month 18 |
+| [`probe-question-the-question.md`](output/probe-question-the-question.md) | Question the Question | The title names the answer before the Context states the problem |
+| [`probe-synthesis.md`](output/probe-synthesis.md) | Synthesis | Verdict (not ready), risk matrix, a validate-before-proceeding checklist, and questions for the three parties the memo actually implies |
 
 ## The point
 

@@ -1,36 +1,34 @@
 ---
-description: Trace the implications and consequences
-argument-hint: <input>
+description: Trace the first- and second-order consequences
+argument-hint: <input> [output-directory] [--out <dir>]
 ---
 
 # Probe: Implications & Consequences
 
-Analyze a document by exploring implications and consequences.
+Run the implications-consequences lens on one input. The lens prompt lives in the `implications-consequences` agent; this command only parses arguments and launches it.
 
-## Usage
-```
-/probe:implications <input>
-```
+## Arguments
 
-## Prompt
+`$ARGUMENTS` holds the input and, optionally, an output directory. Parse it in this order:
 
-You are a critical analyst specializing in **exploring implications and consequences**.
+1. If `--out <dir>` appears anywhere, that is the output directory. Remove it before the next step.
+2. If what remains starts with a quoted string, the quoted string is the input path. Otherwise, if the first whitespace-delimited token is an existing file, that token is the input path, and a second token (when present and no `--out` was given) is the output directory.
+3. If neither matched, the entire remaining text is the input, to be analyzed directly as pasted text.
 
-Your input is in $ARGUMENTS. If it is a file path, read that file and analyze its contents. Otherwise, treat $ARGUMENTS itself as the text to analyze.
+Paths that contain spaces must be quoted.
 
-Create a detailed critical evaluation that:
+## Run
 
-1. **Traces first-order implications** - What directly follows from the recommendation?
-2. **Examines second-order effects** - What happens downstream? What if conditions change?
-3. **Identifies unintended consequences** - What problems might this create?
-4. **Explores consequences of being wrong** - What if key claims are false?
-5. **Considers regulatory/compliance implications** - What legal exposure exists?
-6. **Maps downstream effects** - Impact on roadmap, hiring, technical debt, operations
+Use the Agent tool with `subagent_type: "probe:implications-consequences"`. If the `probe:`-prefixed agent type is not available (the files were installed by script rather than as a plugin), use the same name without the prefix.
 
-Structure your evaluation with:
-- Consequence chains (if X then Y then Z)
-- Scenario analysis (what if...)
-- Risk assessment matrix
-- Timeline of implications
+Launch prompt:
 
-Output the evaluation as markdown.
+- **Source**: the input path, or the full pasted text.
+- **Output**: only if an output directory was given: `<output-dir>/probe-implications-consequences.md`.
+- **Grounding**: if the source cites function names, constants, file paths, or schema columns, add: "Verify any specific code claims against the actual code at the cited paths; do not take the source's claims about its own codebase at face value."
+
+## Reply
+
+If a file was written, give its path and relay the agent's summary. Otherwise relay the agent's full evaluation.
+
+To consolidate several lenses, run them with the same output directory and then `/probe:synth <output-dir>`.

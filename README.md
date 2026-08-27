@@ -8,7 +8,9 @@ Live at [probe.md](https://probe.md).
 
 ## What it does
 
-Each lens is an independent agent asking a different critical question:
+Each lens is an independent agent asking a different critical question. The lens
+prompts live once, in [`agents/`](agents/); the commands parse arguments and launch them,
+so a full run and a single-lens run apply identical prompts.
 
 | Command | Purpose |
 |---------|---------|
@@ -22,6 +24,9 @@ Each lens is an independent agent asking a different critical question:
 | `/probe:synth` | Synthesize existing evaluation files |
 
 ## Installation
+
+Pick one path. Both provide the same `/probe:*` commands; installing both gives you
+duplicates.
 
 ### Recommended: as a Claude Code plugin
 
@@ -38,8 +43,8 @@ version is published.
 
 ### Alternative: one command (global)
 
-Copies the command files into `~/.claude/commands/probe/`, where they are invoked
-the same way, `/probe:go`, `/probe:clarify`, etc.
+Copies the command files into `~/.claude/commands/probe/` (invoked the same way:
+`/probe:go`, `/probe:clarify`, etc.) and the lens agents into `~/.claude/agents/`.
 
 **macOS / Linux / WSL / Git Bash:**
 
@@ -67,20 +72,23 @@ cd probe
 Global (all projects):
 
 ```bash
-mkdir -p ~/.claude/commands/probe
+mkdir -p ~/.claude/commands/probe ~/.claude/agents
 cp probe/commands/*.md ~/.claude/commands/probe/
+cp probe/agents/*.md ~/.claude/agents/
 ```
 
 ```powershell
-New-Item -ItemType Directory -Force $env:USERPROFILE\.claude\commands\probe
+New-Item -ItemType Directory -Force $env:USERPROFILE\.claude\commands\probe, $env:USERPROFILE\.claude\agents
 Copy-Item probe\commands\*.md $env:USERPROFILE\.claude\commands\probe\
+Copy-Item probe\agents\*.md $env:USERPROFILE\.claude\agents\
 ```
 
 Or project-level, so the commands ship with a specific repo:
 
 ```bash
-mkdir -p YOUR_PROJECT_ROOT/.claude/commands/probe
+mkdir -p YOUR_PROJECT_ROOT/.claude/commands/probe YOUR_PROJECT_ROOT/.claude/agents
 cp probe/commands/*.md YOUR_PROJECT_ROOT/.claude/commands/probe/
+cp probe/agents/*.md YOUR_PROJECT_ROOT/.claude/agents/
 ```
 
 ## Usage
@@ -91,9 +99,14 @@ Run all six lenses in parallel:
 
 ```
 /probe:go path/to/input.md ./output-directory
+/probe:go "path with spaces/input.md" --out ./output-directory
+/probe:go Here is an idea I have been kicking around... --out ./output-directory
 ```
 
-The input can be a file path or pasted text. The output directory is optional; it defaults to `./probe-output/`.
+The input is a file path or pasted text. The output directory is optional and
+defaults to `./probe-output/`; give it as a second argument after a file path, or
+with `--out <dir>` anywhere (the only way to set it for pasted text). Quote paths
+that contain spaces.
 
 This will:
 1. Launch 6 specialized analysis agents in parallel
@@ -122,13 +135,22 @@ Run a specific type of analysis:
 /probe:meta path/to/input.md          # Question the question
 ```
 
+With no output directory the evaluation is returned in the conversation. Add one
+(`--out ./dir`, or a second argument after a file path) and the lens writes its
+canonical file, `probe-<lens>.md`, there instead.
+
 ### Synthesize existing evaluations
 
-If you have run individual lenses and want to consolidate them:
+Run any lenses you want with the same output directory, then consolidate:
 
 ```
+/probe:assume path/to/input.md --out ./output-directory
+/probe:evidence path/to/input.md --out ./output-directory
 /probe:synth ./output-directory
 ```
+
+The synthesis works from whichever lens files are present. Missing lenses are named
+in the synthesis, not invented.
 
 ## The six lenses
 
@@ -192,9 +214,13 @@ The synthesis consolidates findings into an actionable format:
 5. **Unexplored Alternatives** - Options not considered
 6. **Hidden Costs & Consequences** - Unaddressed implications
 7. **The Meta-Question** - Is the document asking the right question?
-8. **Decision Framework** - Validation checklist
-9. **Stakeholder Questions** - Questions for CEO, CTO, CFO, Product
-10. **Final Verdict** - Ready for action or needs more work?
+8. **Validate Before Proceeding** - Checklist of what to check, measure, or decide first
+9. **Questions for the People Who Decide** - Addressed to the roles the input actually
+   implies; omitted when the author is the only decider
+10. **Final Verdict** - Ready to act on, ready with named conditions, or not ready
+
+The template is a maximum, not a quota. The synthesis matches the register of the
+input: a page of raw notes gets a different synthesis than a board memo.
 
 ## Use cases
 
@@ -215,7 +241,7 @@ what the probe produces, and what it catches, before running your own.
 
 ## The decision-probe loop (where the depth is)
 
-The six lenses are the engine. The real power is running them as a disciplined loop around a decision you are about to lock. `/probe:go` ships with a full methodology section covering:
+The six lenses are the engine. The real power is running them as a disciplined loop around a decision you are about to lock. [`docs/methodology.md`](docs/methodology.md) covers:
 
 - **When to probe** - schema/money/audit changes, cross-system contracts, dependency locks; and when to skip (anything reversible in under a day).
 - **Scan for an existing decision first** - if a prior ADR already owns the ground, your write-up is an amendment, not a peer.
@@ -223,7 +249,7 @@ The six lenses are the engine. The real power is running them as a disciplined l
 - **Read the synthesis cold** - write your concessions and pushback before touching the original, then respond once with a unified summary.
 - **After the probe** - when to write a v2, when to escalate a thin result, and the spirit-conflict scan for shape-similar prior decisions.
 
-The premise: a two-minute probe is cheap next to the cost of locking a wrong architectural choice and only discovering it after you have built on top of it. Run `/probe:go` and read the full methodology inline.
+The premise: a probe is cheap next to the cost of locking a wrong architectural choice and only discovering it after you have built on top of it.
 
 ## Requirements
 
@@ -237,9 +263,13 @@ MIT License - See [LICENSE](LICENSE) file.
 ## Contributing
 
 Contributions welcome. Feel free to:
-- Add new lenses
-- Improve existing prompts
+- Add new lenses (an agent in `agents/` plus a thin command in `commands/` that launches it)
+- Improve existing prompts (edit the agent; the commands carry no lens text)
 - Share interesting use cases
+
+When releasing, bump the version in both `.claude-plugin/plugin.json` and
+`.claude-plugin/marketplace.json` (they must match; `/plugin` updates key off the
+marketplace version) and add a [CHANGELOG](CHANGELOG.md) entry.
 
 ## Acknowledgments
 

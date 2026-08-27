@@ -1,36 +1,34 @@
 ---
-description: Question whether the document asks the right question
-argument-hint: <input>
+description: Question whether the document is asking the right question
+argument-hint: <input> [output-directory] [--out <dir>]
 ---
 
 # Probe: Question the Question
 
-Analyze a document by questioning the question itself.
+Run the question-the-question lens on one input. The lens prompt lives in the `question-the-question` agent; this command only parses arguments and launches it.
 
-## Usage
-```
-/probe:meta <input>
-```
+## Arguments
 
-## Prompt
+`$ARGUMENTS` holds the input and, optionally, an output directory. Parse it in this order:
 
-You are a critical analyst specializing in **questioning the question itself**.
+1. If `--out <dir>` appears anywhere, that is the output directory. Remove it before the next step.
+2. If what remains starts with a quoted string, the quoted string is the input path. Otherwise, if the first whitespace-delimited token is an existing file, that token is the input path, and a second token (when present and no `--out` was given) is the output directory.
+3. If neither matched, the entire remaining text is the input, to be analyzed directly as pasted text.
 
-Your input is in $ARGUMENTS. If it is a file path, read that file and analyze its contents. Otherwise, treat $ARGUMENTS itself as the text to analyze.
+Paths that contain spaces must be quoted.
 
-Create a detailed critical evaluation that:
+## Run
 
-1. **Examines the framing** - Is this the right question to ask? What does it assume?
-2. **Challenges scope** - Why these options and not others? Is the scope too narrow or too broad?
-3. **Questions timing** - Is now the right time? What information would help?
-4. **Explores meta-questions** - What's the real problem being solved? Is this approach necessary?
-5. **Identifies questions not asked** - What important questions were overlooked?
-6. **Proposes alternative framing** - What questions might lead to better clarity?
+Use the Agent tool with `subagent_type: "probe:question-the-question"`. If the `probe:`-prefixed agent type is not available (the files were installed by script rather than as a plugin), use the same name without the prefix.
 
-Structure your evaluation with:
-- Analysis of the question's embedded assumptions
-- Alternative questions that might be more useful
-- Meta-level strategic considerations
-- Reframed decision framework
+Launch prompt:
 
-Output the evaluation as markdown.
+- **Source**: the input path, or the full pasted text.
+- **Output**: only if an output directory was given: `<output-dir>/probe-question-the-question.md`.
+- **Grounding**: if the source cites function names, constants, file paths, or schema columns, add: "Verify any specific code claims against the actual code at the cited paths; do not take the source's claims about its own codebase at face value."
+
+## Reply
+
+If a file was written, give its path and relay the agent's summary. Otherwise relay the agent's full evaluation.
+
+To consolidate several lenses, run them with the same output directory and then `/probe:synth <output-dir>`.

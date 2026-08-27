@@ -1,35 +1,34 @@
 ---
-description: Clarify thinking and trace the origin of ideas
-argument-hint: <input>
+description: Clarify thinking and trace where the ideas came from
+argument-hint: <input> [output-directory] [--out <dir>]
 ---
 
 # Probe: Clarify Thinking
 
-Analyze a document by clarifying thinking and exploring the origin of ideas.
+Run the clarify-thinking lens on one input. The lens prompt lives in the `clarify-thinking` agent; this command only parses arguments and launches it.
 
-## Usage
-```
-/probe:clarify <input>
-```
+## Arguments
 
-## Prompt
+`$ARGUMENTS` holds the input and, optionally, an output directory. Parse it in this order:
 
-You are a critical analyst specializing in **clarifying thinking and exploring the origin of ideas**.
+1. If `--out <dir>` appears anywhere, that is the output directory. Remove it before the next step.
+2. If what remains starts with a quoted string, the quoted string is the input path. Otherwise, if the first whitespace-delimited token is an existing file, that token is the input path, and a second token (when present and no `--out` was given) is the output directory.
+3. If neither matched, the entire remaining text is the input, to be analyzed directly as pasted text.
 
-Your input is in $ARGUMENTS. If it is a file path, read that file and analyze its contents. Otherwise, treat $ARGUMENTS itself as the text to analyze.
+Paths that contain spaces must be quoted.
 
-Create a detailed critical evaluation that:
+## Run
 
-1. **Identifies key claims and concepts** that need clarification
-2. **Questions definitions** - What exactly is meant by key terms? How are they being defined?
-3. **Traces origin of conclusions** - Where do assertions come from? Primary research, vendor marketing, or inference?
-4. **Examines reasoning chains** - How does the document get from premises to conclusions?
-5. **Highlights ambiguities** in terminology or logic
-6. **Assesses conceptual clarity** - Are terms used consistently throughout?
+Use the Agent tool with `subagent_type: "probe:clarify-thinking"`. If the `probe:`-prefixed agent type is not available (the files were installed by script rather than as a plugin), use the same name without the prefix.
 
-Structure your evaluation with:
-- Direct quotes from the document
-- Probing questions that reveal unclear or unexamined thinking
-- Assessment of whether reasoning is sound
+Launch prompt:
 
-Output the evaluation as markdown.
+- **Source**: the input path, or the full pasted text.
+- **Output**: only if an output directory was given: `<output-dir>/probe-clarify-thinking.md`.
+- **Grounding**: if the source cites function names, constants, file paths, or schema columns, add: "Verify any specific code claims against the actual code at the cited paths; do not take the source's claims about its own codebase at face value."
+
+## Reply
+
+If a file was written, give its path and relay the agent's summary. Otherwise relay the agent's full evaluation.
+
+To consolidate several lenses, run them with the same output directory and then `/probe:synth <output-dir>`.

@@ -1,36 +1,34 @@
 ---
-description: Explore alternative viewpoints and counter-arguments
-argument-hint: <input>
+description: Surface counter-arguments and perspectives the document left out
+argument-hint: <input> [output-directory] [--out <dir>]
 ---
 
-# Probe: Alternative Points of View
+# Probe: Alternative Viewpoints
 
-Analyze a document by discovering alternative viewpoints and conflicts.
+Run the alternative-viewpoints lens on one input. The lens prompt lives in the `alternative-viewpoints` agent; this command only parses arguments and launches it.
 
-## Usage
-```
-/probe:pov <input>
-```
+## Arguments
 
-## Prompt
+`$ARGUMENTS` holds the input and, optionally, an output directory. Parse it in this order:
 
-You are a critical analyst specializing in **discovering alternative viewpoints, perspectives, and conflicts**.
+1. If `--out <dir>` appears anywhere, that is the output directory. Remove it before the next step.
+2. If what remains starts with a quoted string, the quoted string is the input path. Otherwise, if the first whitespace-delimited token is an existing file, that token is the input path, and a second token (when present and no `--out` was given) is the output directory.
+3. If neither matched, the entire remaining text is the input, to be analyzed directly as pasted text.
 
-Your input is in $ARGUMENTS. If it is a file path, read that file and analyze its contents. Otherwise, treat $ARGUMENTS itself as the text to analyze.
+Paths that contain spaces must be quoted.
 
-Create a detailed critical evaluation that:
+## Run
 
-1. **Presents strongest counter-arguments** - Steel-man the opposing positions
-2. **Identifies stakeholder perspectives** not represented (customers, employees, competitors, regulators)
-3. **Explores internal contradictions** - Are there conflicts within the analysis?
-4. **Considers alternative approaches** - What other solutions weren't explored?
-5. **Questions the framing** - Is this the only valid lens? What about other criteria?
-6. **Steel-mans rejected options** - Present the best possible case for each alternative
+Use the Agent tool with `subagent_type: "probe:alternative-viewpoints"`. If the `probe:`-prefixed agent type is not available (the files were installed by script rather than as a plugin), use the same name without the prefix.
 
-Structure your evaluation with:
-- Articulated counter-arguments
-- Multiple stakeholder perspectives
-- Internal contradiction analysis
-- Alternative approaches table
+Launch prompt:
 
-Output the evaluation as markdown.
+- **Source**: the input path, or the full pasted text.
+- **Output**: only if an output directory was given: `<output-dir>/probe-alternative-viewpoints.md`.
+- **Grounding**: if the source cites function names, constants, file paths, or schema columns, add: "Verify any specific code claims against the actual code at the cited paths; do not take the source's claims about its own codebase at face value."
+
+## Reply
+
+If a file was written, give its path and relay the agent's summary. Otherwise relay the agent's full evaluation.
+
+To consolidate several lenses, run them with the same output directory and then `/probe:synth <output-dir>`.
